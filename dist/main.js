@@ -1,0 +1,1 @@
+(()=>{const s=config.API_KEY;!async function(){const e=await fetch(`https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/Dallas%2CTexas/next7days?unitGroup=us&include=days&key=${s}&contentType=json`,{mode:"cors"}),n=await e.json();console.log(n)}()})();

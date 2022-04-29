@@ -1,0 +1,3 @@
+var config = {
+  API_KEY: "F4J76SGWQKAY7Y78Y7RZ4EB8U",
+};
