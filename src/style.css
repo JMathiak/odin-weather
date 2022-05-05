@@ -58,4 +58,24 @@
     height: 150px;
   }
 
- 
+ .search{
+     height: 230px;
+     width: 40%;
+     display: flex;
+     justify-content: flex-start;
+     align-items: end;
+     padding-left: 50px;
+     padding-bottom: 25px;
+     border: 1px solid red;
+ }
+
+ .search-field{
+     /* border-top: none;
+     border-left: none;
+     border-right: none; */
+     height: 40px;
+ }
+
+ .forms > select, button{
+     height: 40px;
+ }
