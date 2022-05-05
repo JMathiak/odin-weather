@@ -8,7 +8,7 @@
   }
 
   
-  .container{
+  #container{
       height: 100%;
       width: 100%;
       display:grid;
@@ -25,12 +25,37 @@
   .header{
       grid-area: header;
       border: 1px solid blue;
-      background: blue;
+      
 
   }
 
   .content{
       grid-area: content;
       border: 1px solid yellow;
-      background: yellow;
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      padding-top: 20px;
   }
+
+  .card {
+    background-color: white;
+    border: solid 1px black;
+    border-radius: 5px 5px 5px 5px;
+    position: relative;
+    height: 325px;
+    width: 250px;
+  }
+ 
+  .date, .temp, .condition{
+      display: flex;
+      justify-content: center;
+  }
+
+  .icon{
+     display: block;
+     margin:auto;
+     width: 150px;
+    height: 150px;
+  }
+
+ 
