@@ -3,9 +3,11 @@ const APIKey = config.API_KEY;
 
 async function getWeather() {
   let search = getSearch();
+  let unit = document.getElementById("tempType").value;
+
   try {
     const response = await fetch(
-      `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${search}/next7days?unitGroup=us&include=days,hours&key=${APIKey}&contentType=json`,
+      `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${search}/next7days?unitGroup=${unit}&include=days,hours&key=${APIKey}&contentType=json`,
       { mode: "cors" }
     );
     const weather = await response.json();
