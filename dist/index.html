@@ -12,14 +12,16 @@
     
     <div id="container">
     <div class="header">
-        <form >
-            <input type="text" id="locationInput" placeholder="Search for a Location...">
-            <select size="1" id="tempType">
-                <option value="farenheit">&#176;F</option>
-                <option value="celsius">&#176;C</option>
-            </select>
-            <button id='search-for-weather' type="button">Search</button>
-        </form>
+        <div class="search">
+            <form class="forms">
+                <input class='search-field 'type="text" id="locationInput" placeholder="Search for a Location...">
+                <select size="1" id="tempType">
+                    <option value="us">&#176;F</option>
+                    <option value="metric">&#176;C</option>
+                </select>
+                <button id='search-for-weather' type="button">Search</button>
+            </form>
+        </div>
     </div>
     <div class='content' id="weather"></div>
 </div>
