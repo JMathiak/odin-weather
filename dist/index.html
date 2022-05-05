@@ -9,21 +9,20 @@
 </head>
 <body>
     <script type='text/javascript' src='../config.js'></script>
-    <script src="main.js"></script>
+    
     <div class="container">
     <div class="header">
-        
-        <form>
-            <input type="text" id="cityInput" placeholder="Search for a Location...">
+        <form >
+            <input type="text" id="locationInput" placeholder="Search for a Location...">
             <select size="1" id="tempType">
                 <option value="farenheit">&#176;F</option>
                 <option value="celsius">&#176;C</option>
             </select>
-            <input id='search-for-weather'type="Button" value="Get Forecast">
+            <button id='search-for-weather' type="button">Search</button>
         </form>
     </div>
-
     <div class='content' id="weather"></div>
 </div>
+<script src="main.js"></script>
 </body>
 </html>
