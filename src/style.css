@@ -1,0 +1,36 @@
+* {
+    margin: 0;
+    padding: 0;
+  }
+
+  html, body{
+      height: 100%;
+  }
+
+  
+  .container{
+      height: 100%;
+      width: 100%;
+      display:grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      grid-template-rows: 1fr 1fr 1fr 1fr;
+      grid-template-areas: 
+      'header header header'
+      'content content content'
+      'content content content'
+      'content content content';
+      border: 1px solid red;
+  }
+
+  .header{
+      grid-area: header;
+      border: 1px solid blue;
+      background: blue;
+
+  }
+
+  .content{
+      grid-area: content;
+      border: 1px solid yellow;
+      background: yellow;
+  }

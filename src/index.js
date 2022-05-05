@@ -38,4 +38,4 @@ async function renderDays() {
   });
 }
 
-renderDays();
+//renderDays();
