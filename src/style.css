@@ -25,9 +25,9 @@
   .header{
       grid-area: header;
       border: 1px solid blue;
+  }
       
 
-  }
 
   .content{
       grid-area: content;
@@ -35,6 +35,7 @@
       display: grid;
       grid-template-columns: repeat(7, 1fr);
       padding-top: 20px;
+      
   }
 
   .card {
@@ -78,4 +79,9 @@
 
  .forms > select, button{
      height: 40px;
+ }
+
+ .content :first-child{
+     grid-column-start: 2;
+     grid-column-end: 3;
  }
