@@ -1,54 +1,39 @@
+import {
+  weatherObject,
+  getWeather,
+  getUnitSwitchWeather,
+  switchUnits,
+} from "./modules/weather.js";
+
 //console.log(process.env);
-const APIKey = config.API_KEY;
-
-async function getWeather() {
-  let search = getSearch();
-  let unit = document.getElementById("tempType").value;
-
-  try {
-    const response = await fetch(
-      `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${search}/next7days?unitGroup=${unit}&include=days,hours&key=${APIKey}&contentType=json`,
-      { mode: "cors" }
-    );
-    const weather = await response.json();
-    const days = await queryJSON(weather);
-    document.getElementById("locationInput").value = "";
-
-    return days;
-  } catch {
-    alert("No Location Found, Try Again");
-    document.getElementById("locationInput").value = "";
-  }
-}
-
-async function queryJSON(weather) {
-  let interest = [];
-  for (let i = 0; i < 5; i++) {
-    let day = {
-      location: weather.resolvedAddress,
-      date: weather.days[i].datetime,
-      low: weather.days[i].tempmin,
-      high: weather.days[i].tempmax,
-      hourly: weather.days[i].hours,
-      condition: weather.days[i].conditions,
-      icon: weather.days[i].icon,
-    };
-    interest.push(day);
-  }
-  return interest;
-}
 
 async function renderDays() {
-  let weather = await getWeather();
-  console.log(weather);
+  if (weatherObject.days.length > 0) {
+    weatherObject.days = [];
+  }
+  weatherObject.days = await getWeather();
   let div = document.getElementById("weather");
   while (div.firstChild) {
     div.removeChild(div.firstChild);
   }
-  let locationDiv = document.createElement("div");
-  // locationDiv.textContent = weather[0].location;
-  div.appendChild(locationDiv);
-  weather.forEach((day) => {
+  // let unitBtn = document.getElementById("unit-switch");
+  // if (weatherObject.units == "us") {
+  //   unitBtn.innerText = `Switch to \u00B0C`;
+  // } else {
+  //   unitBtn.innerText = `Switch to \u00B0F`;
+  // }
+  let locationDiv = document.getElementById("location");
+  locationDiv.textContent = weatherObject.address;
+  let unitDiv = document.getElementById("unit-display");
+  let unitBtn = document.getElementById("switch-units");
+  if (weatherObject.units == "us") {
+    unitDiv.innerText = "Units: Farenheit";
+    unitBtn.innerText = `Switch to \u00B0C`;
+  } else {
+    unitDiv.innerText = "Units: Celsius";
+    unitBtn.innerText = `Switch to \u00B0F`;
+  }
+  weatherObject.days.forEach((day) => {
     let innerDiv = document.createElement("div");
     innerDiv.className = "card";
     let date = parseDate(day.date);
@@ -79,18 +64,47 @@ async function renderDays() {
     div.appendChild(innerDiv);
   });
 
-  document.getElementById("container").classList.add(weather[0].icon);
+  document
+    .getElementById("container")
+    .classList.add(weatherObject.days[0].icon);
+  let nodes = document.getElementsByClassName("card");
+  console.log(nodes);
+  let td = nodes[0].getElementsByClassName("temp");
+  console.log(td[0].innerText);
 }
 
-function getSearch() {
-  let search = document.getElementById("locationInput").value;
-  return search;
+async function updateDays() {
+  switchUnits();
+  weatherObject.days = await getUnitSwitchWeather();
+  let unitDiv = document.getElementById("unit-display");
+  let unitBtn = document.getElementById("switch-units");
+  if (weatherObject.units == "us") {
+    unitDiv.innerText = "Units: Farenheit";
+    unitBtn.innerText = `Switch to \u00B0C`;
+  } else {
+    unitDiv.innerText = "Units: Celsius";
+    unitBtn.innerText = `Switch to \u00B0F`;
+  }
+  let cards = document.getElementsByClassName("card");
+
+  for (let i = 0; i < weatherObject.days.length; i++) {
+    let tempDivs = cards[i].getElementsByClassName("temp");
+    tempDivs[0].innerText =
+      "High: " +
+      Math.round(weatherObject.days[i].high) +
+      `\u00B0` +
+      " Low: " +
+      Math.round(weatherObject.days[i].low) +
+      `\u00B0`;
+  }
 }
 
 function addEventListener() {
   document
     .getElementById("search-for-weather")
     .addEventListener("click", renderDays);
+
+  document.getElementById("switch-units").addEventListener("click", updateDays);
 }
 
 function parseDate(date) {
