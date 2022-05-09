@@ -7,7 +7,7 @@ import {
 } from "./modules/weather.js";
 
 async function renderDays() {
-  let div = document.getElementById("weather");
+  let div = document.getElementById("card-holder");
   let search = "";
   let units = "";
   if (div.hasChildNodes()) {
@@ -68,6 +68,11 @@ async function renderDays() {
     condDiv.innerText = day.condition;
     condDiv.className = "condition";
     innerDiv.appendChild(condDiv);
+
+    let precipDiv = document.createElement("div");
+    precipDiv.innerText = "Precipitation: " + Math.round(day.precip / 10) + "%";
+    precipDiv.className = "precip";
+    innerDiv.appendChild(precipDiv);
     div.appendChild(innerDiv);
   });
 

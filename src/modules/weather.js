@@ -61,6 +61,7 @@ async function queryJSON(weather) {
       high: weather.days[i].tempmax,
       hourly: weather.days[i].hours,
       condition: weather.days[i].conditions,
+      precip: weather.days[i].precipprob,
       icon: weather.days[i].icon,
     };
     daysOfInterest.push(day);
