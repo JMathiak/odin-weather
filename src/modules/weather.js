@@ -11,9 +11,8 @@ const weatherObject = (() => {
   };
 })();
 
-async function getWeather() {
-  let search = getSearch();
-  let units = weatherObject.units;
+async function getWeather(search, units) {
+  console.log(search);
   console.log(units);
   try {
     const response = await fetch(
@@ -82,4 +81,10 @@ function switchUnits() {
   }
 }
 
-export { weatherObject, getWeather, getUnitSwitchWeather, switchUnits };
+export {
+  weatherObject,
+  getWeather,
+  getUnitSwitchWeather,
+  switchUnits,
+  getSearch,
+};

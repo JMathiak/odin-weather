@@ -3,50 +3,56 @@ import {
   getWeather,
   getUnitSwitchWeather,
   switchUnits,
+  getSearch,
 } from "./modules/weather.js";
 
-//console.log(process.env);
-
 async function renderDays() {
+  let div = document.getElementById("weather");
+  let search = "";
+  let units = "";
+  if (div.hasChildNodes()) {
+    search = getSearch();
+    units = weatherObject.units;
+  } else {
+    search = "dallas";
+    units = "us";
+  }
   if (weatherObject.days.length > 0) {
     weatherObject.days = [];
   }
-  weatherObject.days = await getWeather();
-  let div = document.getElementById("weather");
+
+  weatherObject.days = await getWeather(search, units);
+
   while (div.firstChild) {
     div.removeChild(div.firstChild);
   }
-  // let unitBtn = document.getElementById("unit-switch");
-  // if (weatherObject.units == "us") {
-  //   unitBtn.innerText = `Switch to \u00B0C`;
-  // } else {
-  //   unitBtn.innerText = `Switch to \u00B0F`;
-  // }
   let locationDiv = document.getElementById("location");
-  locationDiv.textContent = weatherObject.address;
-  let unitDiv = document.getElementById("unit-display");
+  locationDiv.textContent = "Showing Weather for: " + weatherObject.address;
   let unitBtn = document.getElementById("switch-units");
   if (weatherObject.units == "us") {
-    unitDiv.innerText = "Units: Farenheit";
+    locationDiv.innerText += "(\u00B0F)";
     unitBtn.innerText = `Switch to \u00B0C`;
   } else {
-    unitDiv.innerText = "Units: Celsius";
+    locationDiv.innerText += "(\u00B0C)";
     unitBtn.innerText = `Switch to \u00B0F`;
   }
   weatherObject.days.forEach((day) => {
     let innerDiv = document.createElement("div");
     innerDiv.className = "card";
+
     let date = parseDate(day.date);
     let dateDiv = document.createElement("div");
     dateDiv.className = "date";
     dateDiv.innerText = date;
     innerDiv.appendChild(dateDiv);
+
     let iconHolder = document.createElement("div");
     iconHolder.className = "icon";
     let iconDiv = document.createElement("img");
     innerDiv.appendChild(iconHolder);
     iconHolder.appendChild(iconDiv);
     iconDiv.src = "../icons/" + day.icon + ".svg";
+
     let tempDiv = document.createElement("div");
     tempDiv.className = "temp";
     tempDiv.textContent =
@@ -57,6 +63,7 @@ async function renderDays() {
       Math.round(day.low) +
       `\u00B0`;
     innerDiv.appendChild(tempDiv);
+
     let condDiv = document.createElement("div");
     condDiv.innerText = day.condition;
     condDiv.className = "condition";
@@ -75,18 +82,22 @@ async function renderDays() {
 
 async function updateDays() {
   switchUnits();
+  console.log(document.getElementById("switch-units").innerText);
   weatherObject.days = await getUnitSwitchWeather();
-  let unitDiv = document.getElementById("unit-display");
+
+  let locationDiv = document.getElementById("location");
+  locationDiv.textContent = "Showing Weather for: " + weatherObject.address;
+
   let unitBtn = document.getElementById("switch-units");
   if (weatherObject.units == "us") {
-    unitDiv.innerText = "Units: Farenheit";
+    locationDiv.innerText += "(\u00B0F)";
     unitBtn.innerText = `Switch to \u00B0C`;
   } else {
-    unitDiv.innerText = "Units: Celsius";
+    locationDiv.innerText += "(\u00B0C)";
     unitBtn.innerText = `Switch to \u00B0F`;
   }
-  let cards = document.getElementsByClassName("card");
 
+  let cards = document.getElementsByClassName("card");
   for (let i = 0; i < weatherObject.days.length; i++) {
     let tempDivs = cards[i].getElementsByClassName("temp");
     tempDivs[0].innerText =
@@ -127,5 +138,7 @@ function parseDate(date) {
 
   return month + " " + parseInt(splitDate[2], 10);
 }
-
-addEventListener();
+window.onload = function () {
+  addEventListener();
+  renderDays();
+};
