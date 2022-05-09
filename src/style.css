@@ -25,8 +25,38 @@
   .header{
       grid-area: header;
       border: 1px solid blue;
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      grid-template-areas: 'search df su';
   }
-      
+  .search{
+    grid-area: search;
+    /* height: 230px;
+    width: 100%; */
+    display: flex;
+    justify-content: flex-start;
+    align-items: end;
+    padding-left: 50px;
+    padding-bottom: 25px;
+    border: 1px solid red;
+}
+
+.display-info{
+    grid-area: df;
+}
+
+.unit-switcher{
+    grid-area: su;
+    display:flex;
+    justify-content: center;
+    align-items: end;
+    padding-bottom: 25px;
+}
+
+      #switch-units{
+         
+          width: 20%;
+      }
 
 
   .content{
@@ -59,16 +89,7 @@
     height: 150px;
   }
 
- .search{
-     height: 230px;
-     width: 40%;
-     display: flex;
-     justify-content: flex-start;
-     align-items: end;
-     padding-left: 50px;
-     padding-bottom: 25px;
-     border: 1px solid red;
- }
+
 
  .search-field{
      /* border-top: none;

@@ -15,20 +15,17 @@
         <div class="search">
             <form class="forms">
                 <input class='search-field 'type="text" id="locationInput" placeholder="Search for a Location...">
-                <!-- <select size="1" id="tempType">
-                    <option value="us">&#176;F</option>
-                    <option value="metric">&#176;C</option>
-                </select> -->
                 <button id='search-for-weather' type="button">Search</button>
             </form>
         </div>
-        <div id="location"></div>
-        <div id="unit-display"></div>
-        <button id="switch-units" type="button">Switch to &#176;C </button>
+        <div class="display-info">
+            <div id="location"></div>
+        </div>
+        <div class="unit-switcher">
+            <button id="switch-units" type="button">Switch to &#176;C </button>
+        </div>
     </div>
-    <div class='content' id="weather">
-        
-    </div>
+    <div class='content' id="weather"></div>
 </div>
 <script src="main.js"></script>
 </body>
