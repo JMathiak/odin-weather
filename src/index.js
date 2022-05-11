@@ -6,6 +6,8 @@ import {
   getSearch,
 } from "./modules/weather.js";
 
+//Function for rendering the data that is stored in the weather object. Called
+// when a new location is searched also on page load.
 async function renderDays() {
   let div = document.getElementById("card-holder");
   let search = "";
@@ -97,10 +99,15 @@ async function renderDays() {
   currWindCell.innerText = weatherObject.currentWind + " mph";
 }
 
+// Function for switching units between us and metric. Called when the switch units button is clicked.
+// Updates temperatures on cards and current condition temperatures. Also updates wind speed in current conditions.
 async function updateDays() {
   switchUnits();
   console.log(document.getElementById("switch-units").innerText);
-  weatherObject.days = await getUnitSwitchWeather();
+  weatherObject.days = await getWeather(
+    weatherObject.address,
+    weatherObject.units
+  );
 
   let locationDiv = document.getElementById("location");
   locationDiv.textContent = "Showing Weather for: " + weatherObject.address;
@@ -137,6 +144,7 @@ async function updateDays() {
   currFeelCell.innerText = weatherObject.currentFeel + "\u00B0";
 }
 
+//Adds event listeners for the search button and the switch units button.
 function addEventListener() {
   document
     .getElementById("search-for-weather")
@@ -145,6 +153,7 @@ function addEventListener() {
   document.getElementById("switch-units").addEventListener("click", updateDays);
 }
 
+//Called when cards are rendered. Used to properly display the month name (rather than month number) and day in correct order.
 function parseDate(date) {
   let months = [
     "January",
@@ -165,6 +174,8 @@ function parseDate(date) {
 
   return month + " " + parseInt(splitDate[2], 10);
 }
+
+//Calls functions for adding event listeners and render days for an initial renders. A default location is set for the search in the render days method.
 window.onload = function () {
   addEventListener();
   renderDays();
