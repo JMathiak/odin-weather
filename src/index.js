@@ -1,7 +1,6 @@
 import {
   weatherObject,
   getWeather,
-  getUnitSwitchWeather,
   switchUnits,
   getSearch,
 } from "./modules/weather.js";
