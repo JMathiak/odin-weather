@@ -13,9 +13,10 @@
       width: 100%;
       display:grid;
       grid-template-columns: 1fr 1fr 1fr;
-      grid-template-rows: 1fr 1fr 1fr 1fr;
+      grid-template-rows: 1fr .2fr 1fr 1fr 1fr;
       grid-template-areas: 
       'header header header'
+      'label . .'
       'content content content'
       'content content content'
       'content content content';
@@ -27,6 +28,8 @@
       display: grid;
       grid-template-columns: 1fr 1fr 1fr;
       grid-template-areas: 'search df su';
+      background: #417ab7;
+      color:white;
   }
   .search{
     grid-area: search;
@@ -79,13 +82,24 @@
     width: 20%;
 }
 
-
+.label{
+    grid-area: label;
+    /* border: 1px solid yellow; */
+    display: flex;
+    justify-content: end;
+    align-items: end;
+    padding-right: 60px;
+/* padding-left: 66px; */
+    font-size: 36px;
+}
   .content{
       grid-area: content;
       display: grid;
       grid-template-columns: repeat(7, 1fr);
       grid-template-rows: repeat(3, 1fr);
-      grid-template-areas: '. cards cards cards cards cards .';
+      grid-template-areas: '. cards cards cards cards cards .'
+      'current current current current current current current'
+      'current current current current current current current';
       padding-top: 20px;
       
   }
@@ -94,6 +108,7 @@
       grid-area: cards;
       display: grid;
       grid-template-columns: repeat(5, 1fr);
+      padding-bottom: 10px;
   }
 
   .card {
@@ -101,8 +116,9 @@
     border: solid 1px black;
     border-radius: 5px 5px 5px 5px;
     position: relative;
-    height: 325px;
+    height: 280px;
     width: 250px;
+    padding-top: 20px ;
   }
  
   .date, .temp, .condition, .precip{
@@ -117,7 +133,39 @@
     height: 150px;
   }
 
+#current-conditions{
+    grid-area: current;
+    background-color: #417ab7;
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    grid-template-rows: .2fr .5fr .5fr .5fr .5fr .5fr;
+    grid-template-areas: '. cl cl . . . .'
+    '. ct . . . . .'
+    '. cfl . . . . .'
+    '. ch . . . . .'
+    '. cw . . . . .';
+    color: white;
+}
+.current-label{
+grid-area: cl;
+color: white;
+font-size: 36px;
+}
 
+.curr-temp{
+    grid-area: ct;
+}
+.curr-feels-like{
+    grid-area: cfl;
+}
+
+.curr-humidity{
+    grid-area: ch;
+}
+
+.curr-wind{
+    grid-area: cw;
+}
 
  .search-field{
      /* border-top: none;
@@ -126,11 +174,23 @@
      height: 40px;
      font-family: 'Roboto Mono', monospace;
      width: 200px;
+     background-color: transparent;
+     border: 1px solid white;
+     color: white;
  }
 
+ .search-field::placeholder{
+    color: white;
+ }
+
+ .search-field:focus{
+     outline: none;
+ }
  #search-for-weather{
      height: 40px;
      padding: 4px;
+    
+     
  }
 
  .forms > select, button{
@@ -144,7 +204,8 @@
 
  button{
      background-color: transparent;
-     border: .5px solid black;
+     border: .5px solid white;
+     color:white;
      font-family: 'Roboto Mono', monospace;
  }
 
