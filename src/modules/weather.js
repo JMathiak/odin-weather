@@ -76,10 +76,4 @@ function switchUnits() {
   }
 }
 
-export {
-  weatherObject,
-  getWeather,
-  getUnitSwitchWeather,
-  switchUnits,
-  getSearch,
-};
+export { weatherObject, getWeather, switchUnits, getSearch };
