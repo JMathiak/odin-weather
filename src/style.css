@@ -189,6 +189,7 @@ tr > :last-child{
 
  .search-field:focus{
      outline: none;
+     background-color: transparent;
  }
  #search-for-weather{
      height: 40px;
