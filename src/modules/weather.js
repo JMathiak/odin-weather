@@ -22,8 +22,6 @@ const weatherObject = (() => {
 
 //Function used to get weather when a new search is made or when units are switched.
 async function getWeather(search, units) {
-  console.log(search);
-  console.log(units);
   try {
     const response = await fetch(
       `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${search}/next7days?unitGroup=${units}&include=days,hours&key=${APIKey}&contentType=json`,
@@ -42,7 +40,6 @@ async function getWeather(search, units) {
 
 //Function to extract needed info from the API call.
 async function queryJSON(weather) {
-  console.log(weather);
   let daysOfInterest = [];
   weatherObject.currentTemp = Math.round(weather.days[0].hours[0].temp);
   weatherObject.currentFeel = Math.round(weather.days[0].hours[0].feelslike);

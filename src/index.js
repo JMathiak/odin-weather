@@ -82,9 +82,7 @@ async function renderDays() {
     .getElementById("container")
     .classList.add(weatherObject.days[0].icon);
   let nodes = document.getElementsByClassName("card");
-  console.log(nodes);
   let td = nodes[0].getElementsByClassName("temp");
-  console.log(td[0].innerText);
 
   let currTempCell = document.getElementById("current-temp");
   currTempCell.innerText = weatherObject.currentTemp + "\u00B0";
@@ -103,7 +101,7 @@ async function renderDays() {
 // Updates temperatures on cards and current condition temperatures. Also updates wind speed in current conditions.
 async function updateDays() {
   switchUnits();
-  console.log(document.getElementById("switch-units").innerText);
+
   weatherObject.days = await getWeather(
     weatherObject.address,
     weatherObject.units
