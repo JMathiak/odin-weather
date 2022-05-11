@@ -94,7 +94,7 @@ async function renderDays() {
   currHumidCell.innerText = weatherObject.currentHumidity + "%";
 
   let currWindCell = document.getElementById("current-wind");
-  currWindCell.innerText = weatherObject.currentWind + "mph";
+  currWindCell.innerText = weatherObject.currentWind + " mph";
 }
 
 async function updateDays() {
@@ -111,11 +111,11 @@ async function updateDays() {
   if (weatherObject.units == "us") {
     locationDiv.innerText += "(\u00B0F)";
     unitBtn.innerText = `Switch to \u00B0C`;
-    currWindCell.innerText = weatherObject.currentWind + "mph";
+    currWindCell.innerText = weatherObject.currentWind + " mph";
   } else {
     locationDiv.innerText += "(\u00B0C)";
     unitBtn.innerText = `Switch to \u00B0F`;
-    currWindCell.innerText = weatherObject.currentWind + "km/h";
+    currWindCell.innerText = weatherObject.currentWind + " km/h";
   }
 
   let cards = document.getElementsByClassName("card");

@@ -167,6 +167,10 @@ font-size: 36px;
     grid-area: cw;
 }
 
+tr > :last-child{
+    padding-left: 3px;
+}
+
  .search-field{
      /* border-top: none;
      border-left: none;
