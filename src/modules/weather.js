@@ -3,11 +3,19 @@ const APIKey = config.API_KEY;
 const weatherObject = (() => {
   let units = "us";
   let address = "";
+  let currentTemp = 0;
+  let currentFeel = 0;
+  let currentHumidity = 0;
+  let currentWind = 0;
   let days = [];
   return {
     units,
     address,
     days,
+    currentFeel,
+    currentHumidity,
+    currentTemp,
+    currentWind,
   };
 })();
 
@@ -53,6 +61,10 @@ async function getUnitSwitchWeather() {
 async function queryJSON(weather) {
   console.log(weather);
   let daysOfInterest = [];
+  weatherObject.currentTemp = Math.round(weather.days[0].hours[0].temp);
+  weatherObject.currentFeel = Math.round(weather.days[0].hours[0].feelslike);
+  weatherObject.currentHumidity = Math.round(weather.days[0].hours[0].humidity);
+  weatherObject.currentWind = Math.round(weather.days[0].hours[0].windspeed);
   for (let i = 0; i < 5; i++) {
     let day = {
       location: weather.address,
