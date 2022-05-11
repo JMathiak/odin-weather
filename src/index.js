@@ -83,6 +83,18 @@ async function renderDays() {
   console.log(nodes);
   let td = nodes[0].getElementsByClassName("temp");
   console.log(td[0].innerText);
+
+  let currTempCell = document.getElementById("current-temp");
+  currTempCell.innerText = weatherObject.currentTemp + "\u00B0";
+
+  let currFeelCell = document.getElementById("current-feels");
+  currFeelCell.innerText = weatherObject.currentFeel + "\u00B0";
+
+  let currHumidCell = document.getElementById("current-humidity");
+  currHumidCell.innerText = weatherObject.currentHumidity + "%";
+
+  let currWindCell = document.getElementById("current-wind");
+  currWindCell.innerText = weatherObject.currentWind + "mph";
 }
 
 async function updateDays() {
@@ -94,12 +106,16 @@ async function updateDays() {
   locationDiv.textContent = "Showing Weather for: " + weatherObject.address;
 
   let unitBtn = document.getElementById("switch-units");
+  let currWindCell = document.getElementById("current-wind");
+
   if (weatherObject.units == "us") {
     locationDiv.innerText += "(\u00B0F)";
     unitBtn.innerText = `Switch to \u00B0C`;
+    currWindCell.innerText = weatherObject.currentWind + "mph";
   } else {
     locationDiv.innerText += "(\u00B0C)";
     unitBtn.innerText = `Switch to \u00B0F`;
+    currWindCell.innerText = weatherObject.currentWind + "km/h";
   }
 
   let cards = document.getElementsByClassName("card");
@@ -113,6 +129,12 @@ async function updateDays() {
       Math.round(weatherObject.days[i].low) +
       `\u00B0`;
   }
+
+  let currTempCell = document.getElementById("current-temp");
+  currTempCell.innerText = weatherObject.currentTemp + "\u00B0";
+
+  let currFeelCell = document.getElementById("current-feels");
+  currFeelCell.innerText = weatherObject.currentFeel + "\u00B0";
 }
 
 function addEventListener() {
