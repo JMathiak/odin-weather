@@ -52,7 +52,7 @@ async function renderDays() {
     let iconDiv = document.createElement("img");
     innerDiv.appendChild(iconHolder);
     iconHolder.appendChild(iconDiv);
-    iconDiv.src = "../icons/" + day.icon + ".svg";
+    iconDiv.src = "./icons/" + day.icon + ".svg";
 
     let tempDiv = document.createElement("div");
     tempDiv.className = "temp";
